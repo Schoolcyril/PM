@@ -1,20 +1,180 @@
-<ion-header [translucent]="true">
+<ion-header >
   <ion-toolbar>
-    <ion-title>
-      Blank
+    <ion-title style="background-color:black;" >
+     <h2 style="color: red">Calculatrice</h2>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
-</ion-content>
+
+<ion-grid class="conteneur_total">
+  <ion-row class="taille">
+    <ion-col size="12" color="primary" class ="field">
+      <ion-label class="display">
+        {{ display }}
+      </ion-label>
+    </ion-col>
+  </ion-row>
+
+
+  <ion-row class="taille" >
+    <ion-col size="3">
+      <ion-button class="numero"
+        (click)="clickNumber('1')"
+        size="large"
+        expand="full">1
+      </ion-button>
+    </ion-col>
+    <ion-col size="3">
+      <ion-button class="numero"
+        (click)="clickNumber('2')"
+        size="large"
+        expand="full">
+        2
+      </ion-button>
+    </ion-col>
+    <ion-col size="3">
+      <ion-button class="numero"
+        (click)="clickNumber('3')"
+        size="large"
+        expand="full">
+        3
+      </ion-button>
+    </ion-col>
+
+    <ion-col size="3" >
+      <ion-button class="numero"
+        (click)="clickOperator('+')"
+        size="large"
+        expand="full">
+        <ion-icon size="large" name="add">+</ion-icon>
+      </ion-button>
+    </ion-col>
+
+  </ion-row>
+
+  <ion-row class="taille">
+    <ion-col size="3">
+      <ion-button class="numero"
+        (click)="clickNumber('4')"
+        size="large"
+        expand="full">
+        4
+      </ion-button>
+    </ion-col>
+    <ion-col size="3">
+      <ion-button class="numero"
+        (click)="clickNumber('5')"
+        size="large"
+        expand="full">
+        5
+      </ion-button>
+    </ion-col>
+    <ion-col size="3">
+      <ion-button class="numero"
+        (click)="clickNumber('6')"
+        size="large"
+        expand="full">
+        6
+      </ion-button>
+    </ion-col>
+    <ion-col size="3">
+      <ion-button class="numero"
+        (click)="clickOperator('-')"
+        size="large"
+        expand="full">
+        <ion-icon size="large" name="remove">-</ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="taille">
+    <ion-col size="3">
+      <ion-button class="numero"
+        (click)="clickNumber('7')"
+        size="large"
+        expand="full">
+        7
+      </ion-button>
+    </ion-col>
+    <ion-col size="3">
+      <ion-button class="numero"
+        (click)="clickNumber('8')"
+        size="large"
+        expand="full">
+        8
+      </ion-button>
+    </ion-col>
+    <ion-col size="3">
+      <ion-button class="numero"
+        (click)="clickNumber('9')"
+        size="large"
+        expand="full">
+        9
+      </ion-button>
+    </ion-col>
+    <ion-col size="3">
+      <ion-button class="numero"
+        (click)="clickOperator('*')"
+        size="large"
+        expand="full">
+        <ion-icon size="large" name="close"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="taille">
+
+    <ion-col size="3" class="parding">
+      <ion-button class="numero"
+        (click)="clickNumber('0')"
+        size="large"
+        expand="full">
+        0
+      </ion-button>
+    </ion-col>
+
+    <ion-col size="3">
+      <ion-button class="numero"
+        (click)="setDecimal()"
+        size="large"
+        expand="full">
+        .
+      </ion-button>
+    </ion-col>
+    <ion-col size="3">
+      <ion-button class="numero"
+        (click)="reset()"
+        size="large"
+        expand="full">
+        C
+      </ion-button>
+    </ion-col>
+
+
+    <ion-col size="3">
+      <ion-button class="numero"
+        (click)="clickOperator('/')"
+        size="large"
+        expand="full">
+        /
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="taille">
+
+    <ion-col size="3"  >
+      <ion-button id="egal" class="numero"
+        (click)="calculate(true)"
+        size="large"
+        expand="full">
+        =
+      </ion-button>
+    </ion-col>
+
+  </ion-row>
+
+</ion-grid>
+
