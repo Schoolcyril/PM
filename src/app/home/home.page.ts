@@ -6,63 +6,114 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
-  display = 0;
-  memory = 0;
+  op1 = false
+  op2 = false
+  op = false
+  display:string =''+0;
+  memory1= 0;
+  memory2 = 0;
   state = 'number';
   operator = '+';
   decimal = false;
   decimals = 0;
 
-  clickNumber(n: number) {
+  clickNumber(n:string) {
     switch (this.state) {
       case 'number':
+        this.op1=true;
         if (this.decimal) {
           this.decimals++;
-          this.display = this.display + n * Math.pow(10, -this.decimals);
+          if(this.memory2 != 0){
+            this.display=this.display+'.'+n;
+            this.memory2=this.memory2+parseInt(n)* Math.pow(10, (-this.decimals));
+
+          } else{
+            this.display =''+ (parseFloat(this.display)+ parseInt(n) * Math.pow(10, (-this.decimals)));
+          }
+
         } else {
-          this.display = this.display * 10 + n;
+          if(this.memory2 != 0){
+            this.memory2=this.memory2*10+parseInt(n)
+            this.display=this.display+n;
+          }
+          else{
+            if((parseFloat(this.display)*10)!=0){
+              this.display =''+parseFloat(this.display)+n;
+            }
+            else{
+              this.display =''+n;
+            }
+          }
+
         }
         break;
       case 'operator':
-        this.display = n;
+        this.op2= true;
+        this.memory2 = parseFloat(n);
+        this.display =this.display+n;
         this.state = 'number';
+        this.decimals=0;
+        break;
+      case 'result_inter':
+        this.memory1=  parseFloat(this.display);
+        this.display =''+n;
+        this.state = 'number';
+        this.op2 = true;
         break;
       case 'result':
-        this.memory = 0;
-        this.display = n;
+        this.display = ''+n;
         this.state = 'number';
+        this.op1 = true;
+        break;
+
+
     }
   }
 
   clickOperator(o: string) {
 
-    this.calculate();
+    this.calculate(false);
+    this.memory1= parseFloat(this.display);
+    this.display= this.display+o;
     this.operator = o;
-    this.memory = this.display;
+
     this.state = 'operator';
 
   }
 
-  calculate() {
-    this.display = eval('' + this.memory + this.operator + '(' + this.display + ')');
-    this.memory = 0;
+  calculate(bool:boolean) {
+
+    if ((this.op1&&this.op2)||(bool&&this.state=='number')){
+    this.display =this.display+'='+eval(this.memory1+ this.operator + this.memory2 );
+    this.memory1= 0;
+    if(bool)
     this.state = 'result';
+    else
+    this.state = 'result_inter';
+    this.op1=true;
+    this.op2 =false;
     this.operator = '+';
     this.decimal = false;
     this.decimals = 0;
+    }
+    else
+      if(bool&&this.state=='operator'){
+        this.memory1;
+        this.display='SYNTAX ERROR';
+      }
   }
 
   resetLastNumber() {
-    this.display = 0;
+    this.display =''+ 0;
     this.state = 'number';
     this.decimal = false;
     this.decimals = 0;
   }
 
   reset() {
-    this.display = 0;
-    this.memory = 0;
+    this.display =''+0;
+    this.memory1= 0;
+    this.memory2= 0;
     this.state = 'number';
     this.operator = '+';
     this.decimal = false;
@@ -70,7 +121,7 @@ export class HomePage {
   }
 
   changeSign() {
-    this.display = this.display * -1;
+    this.display ='' + parseFloat(this.display) * -1;
   }
 
   setDecimal() {
