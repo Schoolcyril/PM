@@ -84,7 +84,7 @@ export class HomePage {
   calculate(bool:boolean) {
 
     if ((this.op1&&this.op2)||(bool&&this.state=='number')){
-    this.display =this.display+'='+eval(this.memory1+ this.operator + this.memory2 );
+    this.display =eval(this.memory1+this.operator + this.memory2 );
     this.memory1= 0;
     if(bool)
     this.state = 'result';
